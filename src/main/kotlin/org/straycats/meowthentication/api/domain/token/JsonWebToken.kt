@@ -1,16 +1,18 @@
-package org.straycats.meowthentication.api.domain.token.issuer
+package org.straycats.meowthentication.api.domain.token
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import org.straycats.meowthentication.api.config.AppEnvironment
-import org.straycats.meowthentication.api.domain.token.RefreshableToken
-import org.straycats.meowthentication.api.domain.token.TokenType
+import org.straycats.meowthentication.api.domain.token.issuer.TokenIssuer
+import org.straycats.meowthentication.api.domain.token.verifier.TokenVerifier
+import org.straycats.meowthentication.utils.fromJson
 import java.time.Instant
+import java.util.Base64
 import java.util.UUID
 
-class JsonWebTokenIssuer(
+class JsonWebToken(
     private val tokenEnv: AppEnvironment.Token.JWT
-) : TokenIssuer {
+) : TokenIssuer, TokenVerifier {
     private val type = TokenType.JWT
     private val algorithm = Algorithm.HMAC256(tokenEnv.secret)
 
@@ -71,5 +73,35 @@ class JsonWebTokenIssuer(
             refreshToken,
             refreshTtl
         )
+    }
+
+    override fun verify(token: String): Boolean {
+        val verifier = JWT.require(algorithm)
+            .withIssuer(tokenEnv.issuer)
+            .acceptLeeway(tokenEnv.leewayInMils.toLong())
+            .build()
+
+        return try {
+            verifier.verify(token)
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    override fun verifyOrThrow(token: String) {
+        if (verify(token).not()) {
+            throw IllegalArgumentException("token is not valid")
+        }
+    }
+
+    override fun getClaims(token: String): Map<String, Any?> {
+        verifyOrThrow(token)
+        return try {
+            val payload = JWT.decode(token).payload
+            String(Base64.getUrlDecoder().decode(payload)).fromJson()
+        } catch (e: Exception) {
+            throw IllegalArgumentException("token is not valid")
+        }
     }
 }

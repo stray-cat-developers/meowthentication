@@ -6,7 +6,7 @@ import org.straycats.meowthentication.api.config.FlowTestSupport
 import org.straycats.meowthentication.api.domain.authentication.provider.SocialType
 import org.straycats.meowthentication.api.domain.token.TokenType
 
-class SocialAuthorizationControllerTests : FlowTestSupport() {
+class SocialAuthorizationControllerTestsHeader : FlowTestSupport() {
 
     @Test
     fun authorizeWithCode() {

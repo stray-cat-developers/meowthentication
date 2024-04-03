@@ -13,6 +13,7 @@ class AppEnvironment {
         class JWT {
             var ttlInSeconds: Int = 600
             var refreshableInSeconds: Int = 3600 * 24 * 30
+            var leewayInMils: Int = 1000
             lateinit var issuer: String
             lateinit var secret: String
         }
