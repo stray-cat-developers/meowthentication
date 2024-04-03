@@ -1,3 +1,5 @@
+![logo](https://github.com/stray-cat-developers/meowthentication/assets/8306527/9fd1971b-d9ac-418e-ac89-87c108293c7c)
+
 # Meowthentication
 
 Welcome to Meowthentication, the premier OAuth service solution brought to you by stray-cat-developers. Meowthentication offers sleek, purr-fectly designed OAuth integrations with Kakao, Apple, Google, and Naver, powered by the robust environment of JDK 21 and utilizing Gradle for seamless builds and management.
