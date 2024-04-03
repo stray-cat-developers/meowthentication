@@ -1,0 +1,24 @@
+logging:
+  level:
+    org.springframework.web.servlet: debug
+    org.springframework.boot.actuate: off
+    org.springframework.web: debug
+    org.springframework.boot: debug
+    org.straycats: debug
+
+springdoc:
+  show-actuator: false
+  swagger-ui:
+    enabled: false
+    tagsSorter: alpha
+
+app:
+  client:
+    naver:
+      use-dummy: true
+    kakao:
+      use-dummy: true
+    apple:
+      use-dummy: true
+    google:
+      use-dummy: true
