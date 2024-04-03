@@ -14,12 +14,12 @@ import org.straycats.meowthentication.utils.toReply
 
 @Tag(name = "Social Authentication")
 @RestController
-@RequestMapping("/v1/authentication")
+@RequestMapping("/v1/authentication/social/{socialType}")
 class SocialAuthenticationController(
     private val socialAuthenticationInteraction: SocialAuthenticationInteraction
 ) {
     @Operation(summary = "Authenticating by OAuth authorize code")
-    @PostMapping("/social/{socialType}/code")
+    @PostMapping("code")
     fun authenticateWithCode(
         @PathVariable socialType: SocialType,
         @RequestBody request: AuthenticationResources.Request.CodeAuthentication,
@@ -30,7 +30,7 @@ class SocialAuthenticationController(
     }
 
     @Operation(description = "Authenticating by OAuth access token")
-    @PostMapping("/social/{socialType}/access-token")
+    @PostMapping("access-token")
     fun authenticateWithToken(
         @PathVariable socialType: SocialType,
         @RequestBody request: AuthenticationResources.Request.TokenAuthentication,

@@ -6,21 +6,21 @@ import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.gson.GsonFactory
 import org.slf4j.LoggerFactory
 import org.straycats.meowthentication.api.config.AppEnvironment
-import org.straycats.meowthentication.api.domain.authentication.AuthenticationToken
 import org.straycats.meowthentication.api.domain.authentication.SocialProfile
 import org.straycats.meowthentication.api.domain.authentication.provider.SocialClient
+import org.straycats.meowthentication.api.domain.token.RefreshableToken
 import org.straycats.meowthentication.utils.Jackson
 import org.straycats.meowthentication.utils.RestClientSupport
 
-class GoogleStableClient(
+class StableGoogleClient(
     private val env: AppEnvironment.Client.Google,
 ) : SocialClient,
     RestClientSupport(
         Jackson.getMapper(),
         env.logging,
-        LoggerFactory.getLogger(GoogleStableClient::class.java)
+        LoggerFactory.getLogger(StableGoogleClient::class.java)
     ) {
-    override fun authorize(code: String, redirectedUrl: String?): AuthenticationToken {
+    override fun authorize(code: String, redirectedUrl: String?): RefreshableToken {
         val flow = GoogleAuthorizationCodeFlow.Builder(
             NetHttpTransport(),
             GsonFactory(),
@@ -34,7 +34,7 @@ class GoogleStableClient(
                 .apply {
                     redirectedUrl?.let { this.setRedirectUri(it) }
                 }.execute()
-            AuthenticationToken(
+            RefreshableToken(
                 response.tokenType,
                 response.accessToken,
                 response.expiresInSeconds,

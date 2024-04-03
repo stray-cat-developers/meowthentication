@@ -9,7 +9,13 @@ class AppEnvironment {
     val token = Token()
 
     class Token {
-        lateinit var secret: String
+        val jwt = JWT()
+        class JWT {
+            var ttlInSeconds: Int = 600
+            var refreshableInSeconds: Int = 3600 * 24 * 30
+            lateinit var issuer: String
+            lateinit var secret: String
+        }
     }
 
     class Client {

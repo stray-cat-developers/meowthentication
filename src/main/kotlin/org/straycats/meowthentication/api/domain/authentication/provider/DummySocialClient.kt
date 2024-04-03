@@ -1,11 +1,11 @@
 package org.straycats.meowthentication.api.domain.authentication.provider
 
-import org.straycats.meowthentication.api.domain.authentication.AuthenticationToken
 import org.straycats.meowthentication.api.domain.authentication.SocialProfile
+import org.straycats.meowthentication.api.domain.token.RefreshableToken
 import java.util.UUID
 
 class DummySocialClient : SocialClient {
-    override fun authorize(code: String, redirectedUrl: String?): AuthenticationToken {
+    override fun authorize(code: String, redirectedUrl: String?): RefreshableToken {
         return dummyToken()
     }
 
@@ -16,8 +16,8 @@ class DummySocialClient : SocialClient {
         )
     }
 
-    private fun dummyToken(): AuthenticationToken {
-        return AuthenticationToken(
+    private fun dummyToken(): RefreshableToken {
+        return RefreshableToken(
             tokenType = "bearer",
             access = UUID.randomUUID().toString(),
             accessExpiresInSeconds = 3600L,

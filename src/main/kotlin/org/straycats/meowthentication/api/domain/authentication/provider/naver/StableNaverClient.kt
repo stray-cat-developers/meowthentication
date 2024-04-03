@@ -5,9 +5,9 @@ import org.apache.hc.core5.http.HttpHeaders
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType
 import org.straycats.meowthentication.api.config.AppEnvironment
-import org.straycats.meowthentication.api.domain.authentication.AuthenticationToken
 import org.straycats.meowthentication.api.domain.authentication.SocialProfile
 import org.straycats.meowthentication.api.domain.authentication.provider.SocialClient
+import org.straycats.meowthentication.api.domain.token.RefreshableToken
 import org.straycats.meowthentication.utils.Jackson
 import org.straycats.meowthentication.utils.RestClientSupport
 import org.straycats.meowthentication.utils.fromJson
@@ -22,7 +22,7 @@ class StableNaverClient(
 ),
     SocialClient {
 
-    override fun authorize(code: String, redirectedUrl: String?): AuthenticationToken {
+    override fun authorize(code: String, redirectedUrl: String?): RefreshableToken {
         val uri = "${env.authHost}/oauth2.0/token"
         val headers = listOf(
             HttpHeaders.CONTENT_TYPE to MediaType.APPLICATION_FORM_URLENCODED_VALUE
@@ -38,7 +38,7 @@ class StableNaverClient(
             .orElseThrow(NaverClientResources.Reply.Error::class.java)
             .fromJson<NaverClientResources.Reply.Token>()
 
-        return AuthenticationToken(
+        return RefreshableToken(
             result.tokenType,
             result.accessToken,
             result.expiresInSeconds,

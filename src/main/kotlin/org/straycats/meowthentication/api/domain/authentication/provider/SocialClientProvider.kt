@@ -3,13 +3,13 @@ package org.straycats.meowthentication.api.domain.authentication.provider
 import org.springframework.stereotype.Service
 
 @Service
-class AuthenticationProviderHandler(
+class SocialClientProvider(
     private val kakaoClient: SocialClient,
     private val naverClient: SocialClient,
     private val appleClient: SocialClient,
     private val googleClient: SocialClient,
 ) {
-    fun getSocialClient(provider: SocialType): SocialClient {
+    fun get(provider: SocialType): SocialClient {
         return when (provider) {
             SocialType.APPLE -> appleClient
             SocialType.NAVER -> naverClient

@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.straycats.meowthentication.api.config.AppEnvironment
-import org.straycats.meowthentication.api.domain.authentication.AuthenticationToken
 import org.straycats.meowthentication.api.domain.authentication.SocialProfile
 import org.straycats.meowthentication.api.domain.authentication.provider.SocialClient
+import org.straycats.meowthentication.api.domain.token.RefreshableToken
 import org.straycats.meowthentication.utils.Jackson
 import org.straycats.meowthentication.utils.RestClientSupport
 import org.straycats.meowthentication.utils.fromJson
@@ -35,7 +35,7 @@ class StableAppleClient(
         LoggerFactory.getLogger(StableAppleClient::class.java)
     ) {
 
-    override fun authorize(code: String, redirectedUrl: String?): AuthenticationToken {
+    override fun authorize(code: String, redirectedUrl: String?): RefreshableToken {
         val url = "${env.host}/auth/token"
         val headers = listOf(
             HttpHeaders.CONTENT_TYPE to MediaType.APPLICATION_FORM_URLENCODED_VALUE
@@ -51,7 +51,7 @@ class StableAppleClient(
             .orElseThrow()
             .fromJson<AppleClientResources.Reply.Token>()
 
-        return AuthenticationToken(
+        return RefreshableToken(
             result.tokenType,
             result.idToken,
             result.expiresIn,

@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration
 import org.straycats.meowthentication.api.domain.authentication.provider.DummySocialClient
 import org.straycats.meowthentication.api.domain.authentication.provider.SocialClient
 import org.straycats.meowthentication.api.domain.authentication.provider.apple.StableAppleClient
-import org.straycats.meowthentication.api.domain.authentication.provider.google.GoogleStableClient
+import org.straycats.meowthentication.api.domain.authentication.provider.google.StableGoogleClient
 import org.straycats.meowthentication.api.domain.authentication.provider.kakao.StableKakaoClient
 import org.straycats.meowthentication.api.domain.authentication.provider.naver.StableNaverClient
 import org.straycats.meowthentication.utils.RestClient
@@ -22,7 +22,7 @@ class ClientDIConfiguration(
         return if (env.useDummy) {
             DummySocialClient()
         } else {
-            GoogleStableClient(env)
+            StableGoogleClient(env)
         }
     }
 

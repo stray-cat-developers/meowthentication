@@ -5,9 +5,9 @@ import org.apache.hc.core5.http.HttpHeaders
 import org.slf4j.LoggerFactory
 import org.springframework.web.util.UriComponentsBuilder
 import org.straycats.meowthentication.api.config.AppEnvironment
-import org.straycats.meowthentication.api.domain.authentication.AuthenticationToken
 import org.straycats.meowthentication.api.domain.authentication.SocialProfile
 import org.straycats.meowthentication.api.domain.authentication.provider.SocialClient
+import org.straycats.meowthentication.api.domain.token.RefreshableToken
 import org.straycats.meowthentication.utils.Jackson
 import org.straycats.meowthentication.utils.RestClientSupport
 import org.straycats.meowthentication.utils.fromJson
@@ -21,7 +21,7 @@ class StableKakaoClient(
     LoggerFactory.getLogger(StableKakaoClient::class.java)
 ),
     SocialClient {
-    override fun authorize(code: String, redirectedUrl: String?): AuthenticationToken {
+    override fun authorize(code: String, redirectedUrl: String?): RefreshableToken {
         val url = "${env.authHost}/oauth/token"
         val headers = listOf(
             "Content-Type" to "application/x-www-form-urlencoded"
@@ -37,7 +37,7 @@ class StableKakaoClient(
             .orElseThrow(KakaoClientResources.Reply.AuthenticationError::class.java)
             .fromJson<KakaoClientResources.Reply.Token>()
 
-        return AuthenticationToken(
+        return RefreshableToken(
             result.tokenType,
             result.accessToken,
             result.expiresIn,

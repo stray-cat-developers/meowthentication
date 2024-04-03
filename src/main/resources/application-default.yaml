@@ -23,6 +23,12 @@ springdoc:
     tagsSorter: alpha
 
 app:
+  token:
+    jwt:
+      ttl-in-seconds: 600
+      refreshable-in-seconds: 2592000 # 3600 * 24 * 30
+      issuer: ''
+      secret: ''
   client:
     naver:
       host: https://openapi.naver.com

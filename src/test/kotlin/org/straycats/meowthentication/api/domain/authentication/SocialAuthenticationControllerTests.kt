@@ -19,9 +19,9 @@ class SocialAuthenticationControllerTests : FlowTestSupport() {
 
         // Then
         actual.asClue {
-            it.socialType shouldBe provider
-            it.socialIdentifyKey.isBlank() shouldBe false
-            it.socialEmail.isNullOrBlank() shouldBe false
+            it.type shouldBe provider
+            it.identifyKey.isBlank() shouldBe false
+            it.email.isNullOrBlank() shouldBe false
         }
     }
 
@@ -36,9 +36,9 @@ class SocialAuthenticationControllerTests : FlowTestSupport() {
 
         // Then
         actual.asClue {
-            it.socialType shouldBe provider
-            it.socialIdentifyKey.isBlank() shouldBe false
-            it.socialEmail.isNullOrBlank() shouldBe false
+            it.type shouldBe provider
+            it.identifyKey.isBlank() shouldBe false
+            it.email.isNullOrBlank() shouldBe false
         }
     }
 
@@ -54,9 +54,9 @@ class SocialAuthenticationControllerTests : FlowTestSupport() {
 
         // Then
         actual.asClue {
-            it.socialType shouldBe provider
-            it.socialIdentifyKey.isBlank() shouldBe false
-            it.socialEmail.isNullOrBlank() shouldBe false
+            it.type shouldBe provider
+            it.identifyKey.isBlank() shouldBe false
+            it.email.isNullOrBlank() shouldBe false
         }
     }
 
@@ -71,9 +71,9 @@ class SocialAuthenticationControllerTests : FlowTestSupport() {
 
         // Then
         actual.asClue {
-            it.socialType shouldBe provider
-            it.socialIdentifyKey.isBlank() shouldBe false
-            it.socialEmail.isNullOrBlank() shouldBe false
+            it.type shouldBe provider
+            it.identifyKey.isBlank() shouldBe false
+            it.email.isNullOrBlank() shouldBe false
         }
     }
 }

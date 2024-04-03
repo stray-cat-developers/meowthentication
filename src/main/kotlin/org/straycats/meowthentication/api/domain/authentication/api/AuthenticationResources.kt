@@ -1,9 +1,9 @@
 package org.straycats.meowthentication.api.domain.authentication.api
 
 import io.swagger.v3.oas.annotations.media.Schema
-import org.straycats.meowthentication.api.domain.authentication.AuthenticationToken
 import org.straycats.meowthentication.api.domain.authentication.SocialProfile
 import org.straycats.meowthentication.api.domain.authentication.provider.SocialType
+import org.straycats.meowthentication.api.domain.token.RefreshableToken
 
 class AuthenticationResources {
 
@@ -28,16 +28,16 @@ class AuthenticationResources {
         @Schema(name = "Authentication.Reply.SocialAuthentication")
         data class SocialAuthentication(
             @Schema(description = "Social Type")
-            val socialType: SocialType,
+            val type: SocialType,
             @Schema(description = "Social ID")
-            val socialIdentifyKey: String,
+            val identifyKey: String,
             @Schema(description = "Email registered in social media service")
-            val socialEmail: String?
+            val email: String?
         ) {
             companion object {
                 fun from(
                     socialType: SocialType,
-                    token: AuthenticationToken,
+                    token: RefreshableToken,
                     profile: SocialProfile
                 ): SocialAuthentication {
                     return token.run {
