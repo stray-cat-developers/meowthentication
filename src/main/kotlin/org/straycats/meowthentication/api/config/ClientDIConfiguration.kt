@@ -2,12 +2,12 @@ package org.straycats.meowthentication.api.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.straycats.meowthentication.api.domain.authentication.provider.DummySocialClient
-import org.straycats.meowthentication.api.domain.authentication.provider.SocialClient
-import org.straycats.meowthentication.api.domain.authentication.provider.apple.StableAppleClient
-import org.straycats.meowthentication.api.domain.authentication.provider.google.StableGoogleClient
-import org.straycats.meowthentication.api.domain.authentication.provider.kakao.StableKakaoClient
-import org.straycats.meowthentication.api.domain.authentication.provider.naver.StableNaverClient
+import org.straycats.meowthentication.api.domain.social.provider.DummySocialClient
+import org.straycats.meowthentication.api.domain.social.provider.SocialClient
+import org.straycats.meowthentication.api.domain.social.provider.apple.StableAppleClient
+import org.straycats.meowthentication.api.domain.social.provider.google.StableGoogleClient
+import org.straycats.meowthentication.api.domain.social.provider.kakao.StableKakaoClient
+import org.straycats.meowthentication.api.domain.social.provider.naver.StableNaverClient
 import org.straycats.meowthentication.utils.RestClient
 
 @Configuration

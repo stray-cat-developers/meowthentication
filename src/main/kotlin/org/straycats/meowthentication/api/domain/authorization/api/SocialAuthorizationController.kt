@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.straycats.meowthentication.api.common.Reply
-import org.straycats.meowthentication.api.domain.authentication.provider.SocialType
 import org.straycats.meowthentication.api.domain.authorization.SocialAuthorizationInteraction
+import org.straycats.meowthentication.api.domain.social.provider.SocialType
 import org.straycats.meowthentication.api.domain.token.RefreshableToken
 import org.straycats.meowthentication.utils.toReply
 
@@ -22,14 +22,15 @@ class SocialAuthorizationController(
     @PostMapping("code")
     fun authorizeWithCode(
         @PathVariable socialType: SocialType,
-        @RequestBody request: AuthorizationResources.Request.CodeAuthentication
+        @RequestBody request: AuthorizationResources.Request.CodeAuthorization
     ): Reply<RefreshableToken> {
         val authorization = socialAuthorizationInteraction.authorizeWithCode(
             socialType,
             request.code,
             request.issueType,
             request.scopes,
-            request.attributes
+            request.attributes,
+            request.redirectUrl
         )
 
         return authorization.toReply()
@@ -39,7 +40,7 @@ class SocialAuthorizationController(
     @PostMapping("access-token")
     fun authorizeWithToken(
         @PathVariable socialType: SocialType,
-        @RequestBody request: AuthorizationResources.Request.TokenAuthentication
+        @RequestBody request: AuthorizationResources.Request.TokenAuthorization
     ): Reply<RefreshableToken> {
         val authorization = socialAuthorizationInteraction.authorizeWithToken(
             socialType,

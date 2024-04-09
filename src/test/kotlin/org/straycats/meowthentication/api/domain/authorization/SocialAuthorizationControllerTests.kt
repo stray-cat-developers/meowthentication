@@ -3,10 +3,10 @@ package org.straycats.meowthentication.api.domain.authorization
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.straycats.meowthentication.api.config.FlowTestSupport
-import org.straycats.meowthentication.api.domain.authentication.provider.SocialType
+import org.straycats.meowthentication.api.domain.social.provider.SocialType
 import org.straycats.meowthentication.api.domain.token.TokenType
 
-class SocialAuthorizationControllerTestsHeader : FlowTestSupport() {
+class SocialAuthorizationControllerTests : FlowTestSupport() {
 
     @Test
     fun authorizeWithCode() {

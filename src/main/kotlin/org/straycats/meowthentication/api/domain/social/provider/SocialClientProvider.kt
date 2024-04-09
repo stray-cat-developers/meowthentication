@@ -1,4 +1,4 @@
-package org.straycats.meowthentication.api.domain.authentication.provider
+package org.straycats.meowthentication.api.domain.social.provider
 
 import org.springframework.stereotype.Service
 

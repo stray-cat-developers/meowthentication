@@ -6,16 +6,16 @@ import java.util.UUID
 
 class AuthorizationResourcesTests
 
-fun AuthorizationResources.Request.CodeAuthentication.Companion.aFixture() =
-    AuthorizationResources.Request.CodeAuthentication(
+fun AuthorizationResources.Request.CodeAuthorization.Companion.aFixture() =
+    AuthorizationResources.Request.CodeAuthorization(
         UUID.randomUUID().toString(),
         emptyList(),
         TokenType.JWT,
         emptyMap()
     )
 
-fun AuthorizationResources.Request.TokenAuthentication.Companion.aFixture() =
-    AuthorizationResources.Request.TokenAuthentication(
+fun AuthorizationResources.Request.TokenAuthorization.Companion.aFixture() =
+    AuthorizationResources.Request.TokenAuthorization(
         UUID.randomUUID().toString(),
         emptyList(),
         TokenType.JWT,

@@ -1,16 +1,16 @@
 package org.straycats.meowthentication.api.domain.authorization
 
 import org.springframework.stereotype.Service
-import org.straycats.meowthentication.api.domain.authentication.SocialAuthenticationInteraction
-import org.straycats.meowthentication.api.domain.authentication.SocialProfile
-import org.straycats.meowthentication.api.domain.authentication.provider.SocialType
+import org.straycats.meowthentication.api.domain.social.SocialInteraction
+import org.straycats.meowthentication.api.domain.social.SocialProfile
+import org.straycats.meowthentication.api.domain.social.provider.SocialType
 import org.straycats.meowthentication.api.domain.token.RefreshableToken
 import org.straycats.meowthentication.api.domain.token.TokenType
 import org.straycats.meowthentication.api.domain.token.issuer.TokenIssuerProvider
 
 @Service
 class SocialAuthorizationInteraction(
-    private val socialAuthenticationInteraction: SocialAuthenticationInteraction,
+    private val socialInteraction: SocialInteraction,
     private val tokenIssuerProvider: TokenIssuerProvider
 ) {
 
@@ -19,10 +19,10 @@ class SocialAuthorizationInteraction(
         code: String,
         tokenType: TokenType,
         scopes: List<String>,
-        attributes: Map<String, Any>
+        attributes: Map<String, Any>,
+        redirectUrl: String? = null,
     ): RefreshableToken {
-        val authentication = socialAuthenticationInteraction.authentication(socialType, code)
-        val socialProfile = socialAuthenticationInteraction.getProfile(socialType, authentication.access)
+        val socialProfile = socialInteraction.getProfileByCode(socialType, code, redirectUrl)
 
         return authorize(socialType, socialProfile, tokenType, scopes, attributes)
     }
@@ -34,7 +34,7 @@ class SocialAuthorizationInteraction(
         scopes: List<String>,
         attributes: Map<String, Any>
     ): RefreshableToken {
-        val socialProfile = socialAuthenticationInteraction.getProfile(socialType, accessToken)
+        val socialProfile = socialInteraction.getProfileByCode(socialType, accessToken)
         return authorize(socialType, socialProfile, tokenType, scopes, attributes)
     }
 
@@ -48,7 +48,7 @@ class SocialAuthorizationInteraction(
 
         val issuer = tokenIssuerProvider.get(tokenType).apply {
             setSubject(socialType.name)
-            setIdentity(socialProfile.providerUserId)
+            setIdentity(socialProfile.id)
             setScopes(scopes)
             setExtras(attributes)
         }

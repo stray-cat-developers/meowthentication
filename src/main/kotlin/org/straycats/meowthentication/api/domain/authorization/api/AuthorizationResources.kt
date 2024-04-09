@@ -6,18 +6,19 @@ import org.straycats.meowthentication.api.domain.token.TokenType
 class AuthorizationResources {
 
     class Request {
-        @Schema(name = "Authorization.Request.CodeAuthentication")
-        data class CodeAuthentication(
+        @Schema(name = "Authorization.Request.CodeAuthorization")
+        data class CodeAuthorization(
             val code: String,
             val scopes: List<String>,
             val issueType: TokenType,
-            val attributes: Map<String, Any> = emptyMap()
+            val attributes: Map<String, Any> = emptyMap(),
+            val redirectUrl: String? = null
         ) {
             companion object
         }
 
-        @Schema(name = "Authorization.Request.TokenAuthentication")
-        data class TokenAuthentication(
+        @Schema(name = "Authorization.Request.TokenAuthorization")
+        data class TokenAuthorization(
             val accessToken: String,
             val scopes: List<String>,
             val issueType: TokenType,

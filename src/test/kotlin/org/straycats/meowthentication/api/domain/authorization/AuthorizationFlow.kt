@@ -5,9 +5,9 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.post
 import org.straycats.meowthentication.api.common.Reply
-import org.straycats.meowthentication.api.domain.authentication.provider.SocialType
 import org.straycats.meowthentication.api.domain.authorization.api.AuthorizationResources
 import org.straycats.meowthentication.api.domain.authorization.api.SocialAuthorizationController
+import org.straycats.meowthentication.api.domain.social.provider.SocialType
 import org.straycats.meowthentication.api.domain.token.RefreshableToken
 import org.straycats.meowthentication.utils.fromJson
 import org.straycats.meowthentication.utils.toJson
@@ -18,7 +18,7 @@ class AuthorizationFlow(
 
     fun authorizeWithCode(
         socialType: SocialType,
-        request: AuthorizationResources.Request.CodeAuthentication = AuthorizationResources.Request.CodeAuthentication.aFixture()
+        request: AuthorizationResources.Request.CodeAuthorization = AuthorizationResources.Request.CodeAuthorization.aFixture()
     ): RefreshableToken {
         val uri = linkTo<SocialAuthorizationController> { authorizeWithCode(socialType, request) }
             .toUri()
@@ -37,7 +37,7 @@ class AuthorizationFlow(
 
     fun authorizeWithToken(
         socialType: SocialType,
-        request: AuthorizationResources.Request.TokenAuthentication = AuthorizationResources.Request.TokenAuthentication.aFixture()
+        request: AuthorizationResources.Request.TokenAuthorization = AuthorizationResources.Request.TokenAuthorization.aFixture()
     ): RefreshableToken {
         val uri = linkTo<SocialAuthorizationController> { authorizeWithToken(socialType, request) }
             .toUri()

@@ -1,4 +1,4 @@
-package org.straycats.meowthentication.api.domain.authentication.provider.apple
+package org.straycats.meowthentication.api.domain.social.provider.apple
 
 import com.fasterxml.jackson.annotation.JsonAlias
 

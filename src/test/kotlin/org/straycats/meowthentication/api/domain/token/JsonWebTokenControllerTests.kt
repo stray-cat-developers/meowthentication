@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.straycats.meowthentication.api.config.FlowTestSupport
-import org.straycats.meowthentication.api.domain.authentication.provider.SocialType
 import org.straycats.meowthentication.api.domain.authorization.AuthorizationFlow
+import org.straycats.meowthentication.api.domain.social.provider.SocialType
 
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class JsonWebTokenControllerTests : FlowTestSupport() {

@@ -1,9 +1,9 @@
-package org.straycats.meowthentication.api.domain.authentication.provider.kakao
+package org.straycats.meowthentication.api.domain.social.provider.naver
 
 import com.fasterxml.jackson.annotation.JsonAlias
 import org.straycats.meowthentication.utils.RestClientSupport
 
-class KakaoClientResources {
+class NaverClientResources {
 
     class Reply {
         data class Token(
@@ -14,31 +14,28 @@ class KakaoClientResources {
             @JsonAlias("refresh_token")
             val refreshToken: String,
             @JsonAlias("expires_in")
-            val expiresIn: Long,
-            @JsonAlias("refresh_token_expires_in")
-            val refreshTokenExpiresIn: Long
+            val expiresInSeconds: Long
         )
 
         data class Profile(
-            val id: String,
-            @JsonAlias("kakao_account")
-            val kakaoAccount: KakaoAccount?
+            @JsonAlias("resultcode")
+            val resultCode: String,
+            val message: String,
+            @JsonAlias("response")
+            val naver: NaverProfile?
         ) {
-            data class KakaoAccount(
-                val name: String?,
-                val email: String?
+            data class NaverProfile(
+                val id: String,
+                val email: String
             )
         }
 
-        data class AuthenticationError(
-            @JsonAlias("error")
+        data class Error(
             val error: String,
-            @JsonAlias("error_code")
-            val errorCode: String,
             @JsonAlias("error_description")
-            val errorDescription: String,
+            val errorDescription: String
         ) : RestClientSupport.ExternalServiceError(
-            errorCode,
+            error,
             errorDescription
         )
     }

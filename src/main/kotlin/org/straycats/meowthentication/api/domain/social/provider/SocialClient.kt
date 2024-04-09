@@ -1,6 +1,6 @@
-package org.straycats.meowthentication.api.domain.authentication.provider
+package org.straycats.meowthentication.api.domain.social.provider
 
-import org.straycats.meowthentication.api.domain.authentication.SocialProfile
+import org.straycats.meowthentication.api.domain.social.SocialProfile
 import org.straycats.meowthentication.api.domain.token.RefreshableToken
 
 interface SocialClient {

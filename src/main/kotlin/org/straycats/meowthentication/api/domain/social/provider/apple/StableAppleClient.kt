@@ -1,4 +1,4 @@
-package org.straycats.meowthentication.api.domain.authentication.provider.apple
+package org.straycats.meowthentication.api.domain.social.provider.apple
 
 import com.auth0.jwk.JwkProviderBuilder
 import com.auth0.jwt.JWT
@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.straycats.meowthentication.api.config.AppEnvironment
-import org.straycats.meowthentication.api.domain.authentication.SocialProfile
-import org.straycats.meowthentication.api.domain.authentication.provider.SocialClient
+import org.straycats.meowthentication.api.domain.social.SocialProfile
+import org.straycats.meowthentication.api.domain.social.provider.SocialClient
 import org.straycats.meowthentication.api.domain.token.RefreshableToken
 import org.straycats.meowthentication.utils.Jackson
 import org.straycats.meowthentication.utils.RestClientSupport
